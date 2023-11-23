@@ -7,7 +7,12 @@
 		},
 		{
 			"include": "#strings"
-		}
+		},
+    {
+      "name": "comment.block.tql",
+      "begin": "/\\*",
+      "end": "\\*/"
+    }
 	],
 	"repository": {
 		"keywords": {
