@@ -86,11 +86,15 @@
         },
         {
           "match": "\\w+(?=\\()",
-          "name": "entity.name.function"
+          "name": "entity.name.function.tql"
         },
         {
-          "match": "=|\\+|-|/|\\.",
-          "name": "keyword.operator"
+          "match": "=|\\+|-|/|\\.|<|>|<=|>=|==|!=|&&|\\|\\||!",
+          "name": "keyword.operator.tql"
+        },
+        {
+          "match": "\\b(in|ni)\\b",
+          "name": "keyword.operator.in.tql"
         },
         {
           "include": "#atom"
@@ -101,8 +105,16 @@
       "name": "entity.tql",
       "patterns": [
         {
+          "match": "\\b(null|true|false)\\b",
+          "name": "constant.language.tql"
+        },
+        {
+          "match": "\\b(none|bool|int64|uint64|double|duration|time|string|pattern|ip|subnet|list|record)\\b",
+          "name": "storage.type.tql"
+        },
+        {
           "match": "[a-zA-Z_][a-zA-Z-_0-9]*",
-          "name": "word"
+          "name": "entity.name.word.tql"
         },
         {
           "match": "#[a-zA-Z-_\\.]+",
