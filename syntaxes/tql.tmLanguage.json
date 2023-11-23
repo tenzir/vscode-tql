@@ -13,7 +13,7 @@
     "tql"
   ],
   "repository": {
-    "strings": {
+    "string-double": {
       "name": "string.quoted.double.tql",
       "begin": "\"",
       "end": "\"",
@@ -21,6 +21,27 @@
         {
           "name": "constant.character.escape.tql",
           "match": "\\\\."
+        }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.tql",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.tql",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "include": "#string-double"
+        },
+        {
+          "include": "#string-single"
         }
       ]
     },
