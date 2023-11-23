@@ -78,6 +78,34 @@
         }
       ]
     },
+    "list": {
+      "name": "meta.structure.list.tql",
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.operator.list.begin.tql"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "keyword.operator.list.end.tql"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        },
+        {
+          "match": ",",
+          "name": "keyword.operator.list.separator.tql"
+        },
+        {
+          "match": "[^\\s\\]]",
+          "name": "invalid.illegal.expected-list-separator.tql"
+        }
+      ]
+    },
     "expression": {
       "name": "expression",
       "patterns": [
@@ -95,6 +123,9 @@
         {
           "match": "\\b(in|ni)\\b",
           "name": "keyword.operator.in.tql"
+        },
+        {
+          "include": "#list"
         },
         {
           "include": "#atom"
