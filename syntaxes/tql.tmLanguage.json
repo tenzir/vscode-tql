@@ -35,9 +35,8 @@
 		},
 		"line_comment": {
 			"name": "comment.line.double-slash.tql",
-			"begin": "\\s*+(\\/\\/)",
-			"end": "(?<=\\n)",
-			"beginCaptures": {
+			"match": "(//).*$\\n?",
+			"captures": {
 				"1": {
 					"name": "punctuation.definition.comment.tql"
 				}
@@ -46,7 +45,12 @@
 		"block_comment": {
 			"name": "comment.block.tql",
 			"begin": "/\\*",
-			"end": "\\*/"
+			"end": "\\*/",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.comment.tql"
+				}
+			}
 		},
 		"comments": {
 			"patterns": [
