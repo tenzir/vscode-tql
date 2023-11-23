@@ -1,0 +1,25 @@
+{
+  "name": "tql",
+  "displayName": "TQL",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "tql",
+      "aliases": ["TQL", "tql"],
+      "extensions": [".tql"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "tql",
+      "scopeName": "text.tql",
+      "path": "./syntaxes/tql.tmLanguage.json"
+    }]
+  }
+}
