@@ -3,25 +3,13 @@
 	"name": "TQL",
 	"patterns": [
 		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"include": "#comments"
+			"include": "#pipeline"
 		}
 	],
 	"fileTypes": [
-		"sh"
+		"tql"
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.tql",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
 		"strings": {
 			"name": "string.quoted.double.tql",
 			"begin": "\"",
@@ -32,6 +20,61 @@
 					"match": "\\\\."
 				}
 			]
+		},
+		"pipeline": {
+			"name": "meta.structure.pipeline.tql",
+			"patterns": [
+				{
+					"include": "#operator"
+				},
+				{
+					"match": "\\|",
+					"name": "keyword.operator.pipe.tql"
+				},
+				{
+					"include": "#comments"
+				}
+			]
+		},
+		"operator": {
+			"name": "meta.operator.tql",
+			"begin": "(\\w+)",
+			"end": "\\|",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.tql"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#parameters"
+				}
+			]
+		},
+		"parameters": {
+			"name": "meta.operator.parameters.tql",
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#words"
+				},
+				{
+					"include": "#number"
+				}
+			]
+		},
+		"words": {
+			"name": "entity.tql",
+			"match": "[a-zA-Z-_\\.]+"
+		},
+		"number": {
+			"name": "constant.numeric.tql",
+			"match": "([-+]?)(\\d+)(\\.\\d+([eE][+-]?\\d+)?)?"
 		},
 		"line_comment": {
 			"name": "comment.line.double-slash.tql",
@@ -46,7 +89,7 @@
 			"name": "comment.block.tql",
 			"begin": "/\\*",
 			"end": "\\*/",
-			"captures": {
+			"beginCaptures": {
 				"0": {
 					"name": "punctuation.definition.comment.tql"
 				}
