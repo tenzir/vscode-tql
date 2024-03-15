@@ -3,223 +3,236 @@
   "name": "TQL",
   "patterns": [
     {
-      "include": "#pipeline"
-    },
-    {
-      "include": "#pipeline"
+      "include": "#x_root"
     }
   ],
   "fileTypes": [
     "tql"
   ],
+  "foldingStartMarker": "\\{\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
   "repository": {
-    "string-double": {
-      "name": "string.quoted.double.tql",
-      "begin": "\"",
-      "end": "\"",
+    "x_root": {
       "patterns": [
         {
-          "name": "constant.character.escape.tql",
-          "match": "\\\\."
+          "comment": "TODO: Refactor me",
+          "begin": "(if|match)",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#x_common"
+            }
+          ],
+          "end": "(?=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
+        },
+        {
+          "include": "#x_high"
+        },
+        {
+          "name": "tql.operator_mode",
+          "begin": "[a-zA-Z]\\w*(?=\\s)(?!\\s*=)",
+          "beginCaptures": {
+            "0": {
+              "name": "entity.name.function"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#x_common"
+            }
+          ],
+          "end": "(?=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
+        },
+        {
+          "name": "tql.expression_mode",
+          "begin": "(=|\\.)",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#x_common"
+            }
+          ],
+          "end": "(?<!,\\s*)\n$"
+        },
+        {
+          "include": "#x_common"
         }
       ]
     },
-    "string-single": {
-      "name": "string.quoted.single.tql",
-      "begin": "'",
-      "end": "'",
+    "x_high": {
+      "comment": "HIGH PRIO",
       "patterns": [
         {
-          "name": "constant.character.escape.tql",
-          "match": "\\\\."
+          "name": "keyword",
+          "match": "(?<=\\b)(_|is|as|use|return|def|function|pipeline|let|and|or|in|not|let|this|meta|super|for|if|while|match|else)(?=\\b)",
+          "comment": "type|"
         }
       ]
     },
-    "strings": {
+    "x_common": {
       "patterns": [
         {
-          "include": "#string-double"
+          "include": "#x_high"
         },
         {
-          "include": "#string-single"
-        }
-      ]
-    },
-    "pipeline": {
-      "name": "meta.structure.pipeline.tql",
-      "patterns": [
-        {
-          "include": "#operator"
+          "name": "comment.line",
+          "match": "//.*"
         },
         {
-          "match": "\\|",
-          "name": "keyword.operator.pipe.tql"
+          "name": "comment.block",
+          "begin": "/\\*",
+          "end": "\\*/"
         },
         {
-          "include": "#comments"
-        }
-      ]
-    },
-    "operator": {
-      "name": "meta.operator.tql",
-      "begin": "(\\w+)",
-      "end": "\\|",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.control.tql"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#parameters"
-        }
-      ]
-    },
-    "parameters": {
-      "name": "meta.operator.parameters.tql",
-      "patterns": [
-        {
-          "include": "#expression"
-        }
-      ]
-    },
-    "atom": {
-      "patterns": [
-        {
-          "include": "#words"
+          "name": "tql.paren_expr",
+          "patterns": [
+            {
+              "include": "#x_common"
+            }
+          ],
+          "begin": "\\(",
+          "end": "\\)"
         },
         {
-          "include": "#ip"
+          "name": "tql.brackets_expr",
+          "patterns": [
+            {
+              "include": "#x_common"
+            }
+          ],
+          "begin": "\\[",
+          "end": "\\]"
         },
         {
-          "include": "#number"
+          "name": "tql.braces_expr",
+          "begin": "{",
+          "end": "}",
+          "patterns": [
+            {
+              "name": "tql.record_detected",
+              "begin": "\\w+(?=:)",
+              "patterns": [
+                {
+                  "include": "#x_high"
+                },
+                {
+                  "name": "variable.other",
+                  "match": "\\w+(?=:)"
+                },
+                {
+                  "include": "#x_common"
+                }
+              ],
+              "comment": "(?<!,\\s*)(?=$) <<-- REMOVE THIS",
+              "end": "(?=})"
+            },
+            {
+              "comment": "TODO: THIS IS COPIED FROM ABOVE",
+              "name": "tql.braces_expr_is_pipeline",
+              "begin": "(?!\\s|$)",
+              "patterns": [
+                {
+                  "include": "#x_root"
+                }
+              ],
+              "end": "(?=})"
+            }
+          ]
         },
         {
-          "include": "#strings"
-        }
-      ]
-    },
-    "list": {
-      "name": "meta.structure.list.tql",
-      "begin": "\\[",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.operator.list.begin.tql"
-        }
-      },
-      "end": "\\]",
-      "endCaptures": {
-        "0": {
-          "name": "keyword.operator.list.end.tql"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#expression"
+          "name": "constant.tql.number",
+          "match": "[0-9][0-9_]*(\\.[0-9][0-9_]*)?([a-zA-Z_][a-zA-Z_0-9]*)?",
+          "comment": "sign is not included because foo-42"
         },
         {
-          "match": ",",
-          "name": "keyword.operator.list.separator.tql"
+          "name": "constant.tql.ipv4",
+          "match": "[0-9]+\\.[0-9]+(\\.[0-9]+)*"
         },
         {
-          "match": "[^\\s\\]]",
-          "name": "invalid.illegal.expected-list-separator.tql"
-        }
-      ]
-    },
-    "expression": {
-      "name": "expression",
-      "patterns": [
-        {
-          "include": "#comments"
+          "name": "constant.tql.ipv6",
+          "match": "([0-9a-fA-F]*:){2,}[0-9a-fA-F]*(\\.[0-9]+|:[0-9a-fA-F]*)*"
         },
         {
-          "match": "\\w+(?=\\()",
-          "name": "entity.name.function.tql"
+          "match": "(\\w+)(\\$|::)",
+          "captures": {
+            "0": {
+              "name": "keyword"
+            },
+            "1": {
+              "name": "entity.name"
+            }
+          }
         },
         {
-          "match": "=|\\+|-|/|\\.|<|>|<=|>=|==|!=|&&|\\|\\||!",
-          "name": "keyword.operator.tql"
+          "name": "entity.name",
+          "match": "\\w+(?='|\\$|#)",
+          "comment": "\\w+(?=:|'|\\$|#)"
         },
         {
-          "match": "\\b(in|ni)\\b",
-          "name": "keyword.operator.in.tql"
+          "name": "tql.return_back_to_root",
+          "begin": "(\\|)",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#x_root"
+            }
+          ],
+          "end": "(?=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
         },
         {
-          "include": "#list"
+          "name": "string.quoted.double.tql",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.tql",
+              "match": "\\\\."
+            }
+          ]
         },
         {
-          "include": "#atom"
-        }
-      ]
-    },
-    "words": {
-      "name": "entity.tql",
-      "patterns": [
-        {
-          "match": "\\b(null|true|false)\\b",
-          "name": "constant.language.tql"
+          "name": "keyword",
+          "match": "@|;|#|'|\\\\|\\+|-|\\*|/|:|&|=|>|<|\\?|!|\\."
         },
         {
-          "match": "\\b(none|bool|int64|uint64|double|duration|time|string|pattern|ip|subnet|list|record)\\b",
-          "name": "storage.type.tql"
+          "name": "entity.name.function",
+          "match": "\\w+(?=\\()"
         },
         {
-          "match": "[a-zA-Z_][a-zA-Z-_0-9]*",
-          "name": "entity.name.word.tql"
+          "name": "constant",
+          "match": "(?<=\\b)(true|false|null)(?=\\b)"
         },
         {
-          "match": "#[a-zA-Z-_\\.]+",
-          "name": "entity.name.selector.meta.tql"
+          "name": "constant",
+          "match": "(?<=')\\w+"
         },
         {
-          "match": ":[a-zA-Z-_\\.]+",
-          "name": "entity.name.selector.selector.tql"
-        }
-      ]
-    },
-    "number": {
-      "name": "constant.numeric.tql",
-      "match": "([-+]?)(\\d+)(\\.\\d+([eE][+-]?\\d+)?)?"
-    },
-    "ip": {
-      "patterns": [
-        {
-          "name": "constant.numeric.ip.v4.tql",
-          "match": "((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])"
+          "name": "constant",
+          "match": "\\$\\w+"
         },
         {
-          "name": "constant.numeric.ip.v6.tql",
-          "match": "(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))"
-        }
-      ]
-    },
-    "line_comment": {
-      "name": "comment.line.double-slash.tql",
-      "match": "(//).*$\\n?",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.comment.tql"
-        }
-      }
-    },
-    "block_comment": {
-      "name": "comment.block.tql",
-      "begin": "/\\*",
-      "end": "\\*/",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.tql"
-        }
-      }
-    },
-    "comments": {
-      "patterns": [
-        {
-          "include": "#line_comment"
+          "name": "entity.name",
+          "match": "@\\w+"
         },
         {
-          "include": "#block_comment"
+          "name": "keyword",
+          "match": "\\$"
+        },
+        {
+          "name": "variable.other",
+          "match": "\\w+"
         }
       ]
     }
