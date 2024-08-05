@@ -1,8 +1,9 @@
 {
   "name": "tql",
   "displayName": "TQL",
-  "description": "",
-  "version": "0.0.2",
+  "publisher": "Tenzir",
+  "description": "Syntax highlighting for the Tenzir Query Language",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/tenzir/vscode-tql"

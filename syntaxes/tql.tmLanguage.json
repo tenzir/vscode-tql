@@ -3,7 +3,7 @@
   "name": "TQL",
   "patterns": [
     {
-      "include": "#x_root"
+      "include": "#root"
     }
   ],
   "fileTypes": [
@@ -12,10 +12,10 @@
   "foldingStartMarker": "\\{\\s*$",
   "foldingStopMarker": "^\\s*\\}",
   "repository": {
-    "x_root": {
+    "root": {
       "patterns": [
         {
-          "comment": "TODO: Refactor me",
+          "comment": "TODO: Refactor keyword statements.",
           "begin": "(if|match)",
           "beginCaptures": {
             "0": {
@@ -24,13 +24,13 @@
           },
           "patterns": [
             {
-              "include": "#x_common"
+              "include": "#common"
             }
           ],
           "end": "(?=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
         },
         {
-          "include": "#x_high"
+          "include": "#keywords"
         },
         {
           "name": "tql.operator_mode",
@@ -42,7 +42,7 @@
           },
           "patterns": [
             {
-              "include": "#x_common"
+              "include": "#common"
             }
           ],
           "end": "(?=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
@@ -57,18 +57,17 @@
           },
           "patterns": [
             {
-              "include": "#x_common"
+              "include": "#common"
             }
           ],
           "end": "(?<!,\\s*)\n$"
         },
         {
-          "include": "#x_common"
+          "include": "#common"
         }
       ]
     },
-    "x_high": {
-      "comment": "HIGH PRIO",
+    "keywords": {
       "patterns": [
         {
           "name": "keyword",
@@ -77,10 +76,10 @@
         }
       ]
     },
-    "x_common": {
+    "common": {
       "patterns": [
         {
-          "include": "#x_high"
+          "include": "#keywords"
         },
         {
           "name": "comment.line",
@@ -95,7 +94,7 @@
           "name": "tql.paren_expr",
           "patterns": [
             {
-              "include": "#x_common"
+              "include": "#common"
             }
           ],
           "begin": "\\(",
@@ -105,7 +104,7 @@
           "name": "tql.brackets_expr",
           "patterns": [
             {
-              "include": "#x_common"
+              "include": "#common"
             }
           ],
           "begin": "\\[",
@@ -118,17 +117,17 @@
           "patterns": [
             {
               "name": "tql.record_detected",
-              "begin": "\\w+(?=:)",
+              "begin": "(?=\\w+:)",
               "patterns": [
                 {
-                  "include": "#x_high"
+                  "include": "#keywords"
                 },
                 {
                   "name": "variable.other",
                   "match": "\\w+(?=:)"
                 },
                 {
-                  "include": "#x_common"
+                  "include": "#common"
                 }
               ],
               "comment": "(?<!,\\s*)(?=$) <<-- REMOVE THIS",
@@ -140,7 +139,7 @@
               "begin": "(?!\\s|$)",
               "patterns": [
                 {
-                  "include": "#x_root"
+                  "include": "#root"
                 }
               ],
               "end": "(?=})"
@@ -148,7 +147,7 @@
           ]
         },
         {
-          "name": "constant.tql.number",
+          "name": "constant.numeric",
           "match": "[0-9][0-9_]*(\\.[0-9][0-9_]*)?([a-zA-Z_][a-zA-Z_0-9]*)?",
           "comment": "sign is not included because foo-42"
         },
@@ -186,7 +185,7 @@
           },
           "patterns": [
             {
-              "include": "#x_root"
+              "include": "#root"
             }
           ],
           "end": "(?=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
@@ -203,7 +202,7 @@
           ]
         },
         {
-          "name": "keyword",
+          "name": "keyword.operator",
           "match": "@|;|#|'|\\\\|\\+|-|\\*|/|:|&|=|>|<|\\?|!|\\."
         },
         {
@@ -211,7 +210,7 @@
           "match": "\\w+(?=\\()"
         },
         {
-          "name": "constant",
+          "name": "constant.language",
           "match": "(?<=\\b)(true|false|null)(?=\\b)"
         },
         {
@@ -227,7 +226,7 @@
           "match": "@\\w+"
         },
         {
-          "name": "keyword",
+          "name": "keyword.operator",
           "match": "\\$"
         },
         {
