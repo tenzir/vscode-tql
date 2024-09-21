@@ -9,6 +9,10 @@
     "type": "git",
     "url": "https://github.com/tenzir/vscode-tql"
   },
+  "files": [
+    "syntaxes/*.json",
+    "language-configuration.json"
+  ],
   "engines": {
     "vscode": "^1.84.0"
   },
