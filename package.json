@@ -1,5 +1,5 @@
 {
-  "name": "tql",
+  "name": "@tenzir/vscode-tql",
   "displayName": "TQL",
   "publisher": "Tenzir",
   "description": "Syntax highlighting for the Tenzir Query Language",
