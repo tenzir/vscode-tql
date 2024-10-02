@@ -2,6 +2,9 @@
   "name": "@tenzir/vscode-tql",
   "displayName": "TQL",
   "publisher": "Tenzir",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Syntax highlighting for the Tenzir Query Language",
   "icon": "logo.png",
   "version": "0.0.3",
