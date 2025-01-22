@@ -7,7 +7,7 @@
 	},
 	"description": "Syntax highlighting for the Tenzir Query Language (TQL)",
 	"icon": "logo.png",
-	"version": "0.0.3",
+	"version": "1.0.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/tenzir/vscode-tql"
