@@ -1,0 +1,42 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    name: Synchronize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tenzir/vscode-tql repo
+        uses: actions/checkout@v4
+        with:
+          path: vscode-tql
+
+      - name: Checkout tenzir/docs repo
+        uses: actions/checkout@v4
+        with:
+          repository: tenzir/docs
+          token: ${{ secrets.TENZIR_DOCS_REPO_TOKEN }}
+          path: docs
+
+      - name: Copy file to docs repo
+        run: |
+          cp vscode-tql/syntaxes/tql.tmLanguage.json docs/
+          cd docs
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add --update
+          BEFORE=$(echo "${{ github.event.before }}" | cut -c 1-10)
+          AFTER=$(echo "${{ github.event.after }}" | cut -c 1-10)
+          if ! git diff --cached --quiet; then
+            git commit -m "Sync files from tenzir/vscode-tql (${BEFORE}..${AFTER})"
+            git push
+          else
+            echo "No changes to commit."
+          fi
