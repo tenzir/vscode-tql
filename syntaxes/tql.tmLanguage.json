@@ -72,8 +72,12 @@
       "patterns": [
         {
           "name": "keyword",
-          "match": "(?<=\\b)(_|is|as|use|return|def|function|pipeline|let|and|or|in|not|let|this|meta|super|for|if|while|match|else)(?=\\b)",
+          "match": "(?<=\\b)(_|is|as|use|return|def|function|let|in|not|let|this|meta|super|for|while|match)(?=\\b)",
           "comment": "type|"
+        },
+        {
+          "name": "keyword.operator",
+          "match": "(?<=\\b)(and|or|if|else)(?=\\b)"
         }
       ]
     },
@@ -242,4 +246,6 @@
     }
   },
   "scopeName": "text.tql"
+}
+copeName": "text.tql"
 }
