@@ -43,6 +43,67 @@ If you'd like to improve this extension, please:
 - Open an issue on [GitHub](https://github.com/tenzir/vscode-tql/issues)
 - Submit a pull request
 
+### Releasing
+
+To cut a new release, run the following two commands from the repo root:
+
+```sh
+vsce package
+vsce publish
+```
+
+You must have run `vsce login tenzir` once in the past, which requires a valid
+[Azure DevOps Personal Access Token
+(PAT)](https://dev.azure.com/tenzir/_usersSettings/tokens). This token only
+requires the *Marketplace Manage* scope.
+
+Example output:
+
+```txt
+❯ vsce package
+ INFO  Files included in the VSIX:
+vscode-tql-1.0.2.vsix
+├─ [Content_Types].xml
+├─ extension.vsixmanifest
+└─ extension/
+   ├─ LICENSE.txt [1.04 KB]
+   ├─ changelog.md [0.22 KB]
+   ├─ language-configuration.json [0.76 KB]
+   ├─ logo.png [8.27 KB]
+   ├─ package.json [0.76 KB]
+   ├─ readme.md [1.26 KB]
+   └─ syntaxes/
+      └─ tql.tmLanguage.json [5.93 KB]
+
+ DONE  Packaged: /Users/mavam/code/tenzir/vscode-tql/vscode-tql-1.0.2.vsix (9 files, 11.12 KB)
+❯ vsce publish
+ INFO  Files included in the VSIX:
+vscode-tql-1.0.2.vsix
+├─ [Content_Types].xml
+├─ extension.vsixmanifest
+└─ extension/
+   ├─ LICENSE.txt [1.04 KB]
+   ├─ changelog.md [0.22 KB]
+   ├─ language-configuration.json [0.76 KB]
+   ├─ logo.png [8.27 KB]
+   ├─ package.json [0.76 KB]
+   ├─ readme.md [1.26 KB]
+   └─ syntaxes/
+      └─ tql.tmLanguage.json [5.93 KB]
+
+ INFO  Publishing 'tenzir.vscode-tql v1.0.2'...
+ INFO  Extension URL (might take a few minutes): https://marketplace.visualstudio.com/items?itemName=tenzir.vscode-tql
+ INFO  Hub URL: https://marketplace.visualstudio.com/manage/publishers/tenzir/extensions/vscode-tql/hub
+ DONE  Published tenzir.vscode-tql v1.0.2.
+ WARNING  The latest version of @vscode/vsce is 3.3.2 and you have 3.2.1.
+Update it now: npm install -g @vscode/vsce
+```
+
+The new package should show up after a few minutes in the version history
+of the [VisualStudio Marketplace page][vscode-marketplace].
+
+[vscode-marketplace]: https://marketplace.visualstudio.com/items?itemName=tenzir.vscode-tql&ssr=false#version-history
+
 ## License
 
 This extension is licensed under the **MIT License**.  
