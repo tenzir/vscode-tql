@@ -37,7 +37,7 @@ Future updates may introduce customization options.
 
 ## Contributing
 
-Contributions are welcome! 🎉  
+Contributions are welcome! 🎉
 If you'd like to improve this extension, please:
 
 - Open an issue on [GitHub](https://github.com/tenzir/vscode-tql/issues)
@@ -55,7 +55,8 @@ vsce publish
 You must have run `vsce login tenzir` once in the past, which requires a valid
 [Azure DevOps Personal Access Token
 (PAT)](https://dev.azure.com/tenzir/_usersSettings/tokens). This token only
-requires the *Marketplace Manage* scope.
+requires the *Marketplace Manage* scope. New users must also be [added as
+contributors](https://marketplace.visualstudio.com/manage/publishers/).
 
 Example output:
 
@@ -106,5 +107,5 @@ of the [VisualStudio Marketplace page][vscode-marketplace].
 
 ## License
 
-This extension is licensed under the **MIT License**.  
+This extension is licensed under the **MIT License**.
 See [LICENSE](./LICENSE.txt) for details.

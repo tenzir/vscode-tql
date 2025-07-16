@@ -180,11 +180,11 @@
         {
           "match": "(\\w+)(\\$|::)",
           "captures": {
-            "0": {
-              "name": "keyword"
-            },
             "1": {
-              "name": "entity.name"
+              "name": "variable"
+            },
+            "2": {
+              "name": "keyword"
             }
           }
         },
