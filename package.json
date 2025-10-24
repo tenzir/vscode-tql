@@ -1,46 +1,63 @@
 {
-	"name": "vscode-tql",
-	"displayName": "TQL",
-	"publisher": "tenzir",
-	"publishConfig": {
-		"access": "public"
-	},
-	"description": "Syntax highlighting for the Tenzir Query Language (TQL)",
-	"icon": "logo.png",
-	"version": "1.0.3",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tenzir/vscode-tql"
-	},
-	"engines": {
-		"vscode": "^1.84.0"
-	},
-	"categories": [
-		"Programming Languages"
-	],
-	"contributes": {
-		"languages": [
-			{
-				"id": "tql",
-				"aliases": [
-					"TQL",
-					"tql"
-				],
-				"extensions": [
-					".tql"
-				],
-				"configuration": "./language-configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "tql",
-				"scopeName": "text.tql",
-				"path": "./syntaxes/tql.tmLanguage.json"
-			}
-		]
-	},
-	"__metadata": {
-		"size": 91847
-	}
+  "name": "vscode-tql",
+  "displayName": "TQL",
+  "publisher": "tenzir",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Syntax highlighting for the Tenzir Query Language (TQL)",
+  "icon": "logo.png",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tenzir/vscode-tql"
+  },
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:tql"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "build:wasm": "npm run build:wasm:tql && npm run build:wasm:yaml",
+    "build:wasm:tql": "mkdir -p parsers queries/tql && cd ../tree-sitter-tql && tree-sitter build --wasm && cp tree-sitter-tql.wasm ../vscode-tql/parsers/tree-sitter-tql.wasm && cp queries/tql/highlights.scm ../vscode-tql/queries/tql/highlights.scm && cp queries/tql/injections.scm ../vscode-tql/queries/tql/injections.scm",
+    "build:wasm:yaml": "mkdir -p parsers queries/yaml && cp node_modules/@tree-sitter-grammars/tree-sitter-yaml/tree-sitter-yaml.wasm parsers/tree-sitter-yaml.wasm && cp node_modules/@tree-sitter-grammars/tree-sitter-yaml/queries/highlights.scm queries/yaml/highlights.scm",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "prebuild": "npm run build:wasm",
+    "vscode:prepublish": "npm run prebuild && npm run compile"
+  },
+  "dependencies": {
+    "web-tree-sitter": "^0.25.10"
+  },
+  "devDependencies": {
+    "@tree-sitter-grammars/tree-sitter-yaml": "^0.7.1",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.84.0",
+    "tree-sitter-cli": "^0.25.4",
+    "typescript": "^5.3.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "tql",
+        "aliases": [
+          "TQL",
+          "tql"
+        ],
+        "extensions": [
+          ".tql"
+        ],
+        "configuration": "./language-configuration.json",
+        "semanticHighlighting": true
+      }
+    ]
+  },
+  "__metadata": {
+    "size": 91847
+  }
 }

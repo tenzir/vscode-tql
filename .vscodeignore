@@ -4,6 +4,9 @@
 # Allow only necessary files for this package.
 !syntaxes/*.json
 !language-configuration.json
+!parsers/**
+!queries/**
+!out/**
 
 # Also allow core metadata files required for packaging.
 !package.json
@@ -15,3 +18,8 @@
 # Exclude common unwanted directories and files.
 .vscode/
 .github/
+src/
+*.ts
+tsconfig.json
+.eslintrc.json
+**/*.map

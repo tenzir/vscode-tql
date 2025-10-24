@@ -4,7 +4,18 @@
 
 A Visual Studio Code extension for working with the [Tenzir Query Language (TQL)](https://docs.tenzir.com).
 
-This extension provides syntax highlighting and language support for TQL.
+This extension provides syntax highlighting and language support for TQL using the [tree-sitter-tql](https://github.com/tenzir/tree-sitter-tql) grammar for accurate, context-aware highlighting.
+
+## Features
+
+- **Context-aware syntax highlighting** using tree-sitter parser
+- **Semantic token support** for precise highlighting that matches your code's structure
+- Consistent highlighting across editors (VS Code, Neovim, Zed)
+- Support for all TQL language constructs
+
+## Requirements
+
+- VS Code 1.84.0 or higher
 
 ## Installation
 
@@ -35,6 +46,16 @@ This extension does not add new settings (yet).
 
 Future updates may introduce customization options.
 
+## Development
+
+```sh
+npm install
+npm run prebuild   # generates parsers/ and queries/ from tree-sitter grammars
+npm run compile    # emits out/ JavaScript used by VS Code
+```
+
+Both `parsers/` and `out/` are generated artifacts; they are ignored in git but will be bundled automatically via the `vscode:prepublish` script when packaging the extension.
+
 ## Contributing
 
 Contributions are welcome! 🎉
@@ -55,7 +76,7 @@ vsce publish
 You must have run `vsce login tenzir` once in the past, which requires a valid
 [Azure DevOps Personal Access Token
 (PAT)](https://dev.azure.com/tenzir/_usersSettings/tokens). This token only
-requires the *Marketplace Manage* scope. New users must also be [added as
+requires the _Marketplace Manage_ scope. New users must also be [added as
 contributors](https://marketplace.visualstudio.com/manage/publishers/).
 
 Example output:

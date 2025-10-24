@@ -1,0 +1,32 @@
+---
+description: |
+  A frontmatter should now be possible!
+---
+
+// Test comment parsing
+export
+
+/* Multi-line
+   comment */
+from file, foo.txt
+
+// Test pipeline with newlines
+where x > 0
+select a, b, c
+
+// Test pipeline with pipes
+from file, bar.csv | where y < 10 | select x
+
+// Test assignment
+foo = 42
+bar.baz = "hello"
+
+// Test invocation with module path
+std::path::parent
+
+// Test if statement
+if x > 0 {
+  select a
+} else {
+  select b
+}
