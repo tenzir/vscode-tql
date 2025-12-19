@@ -8,26 +8,37 @@ This is a VS Code extension for syntax highlighting and language support for the
 
 ## Core Architecture
 
-The extension is a pure TextMate grammar-based VS Code extension with no compiled TypeScript/JavaScript code. It consists of:
+The extension is a pure TextMate grammar-based VS Code extension with no compiled TypeScript/JavaScript code.
 
-- **TextMate Grammar** (`syntaxes/tql.tmLanguage.json`): Defines syntax highlighting rules for TQL
-  - Uses a repository pattern with `#root`, `#keywords`, `#expression_keywords`, and `#common` patterns
-  - Handles multiple modes: operator mode, expression mode, and nested pipelines in braces
-  - Supports TQL-specific literals: timestamps, IPv4/IPv6 addresses, raw strings (r" and r#")
-  - Distinguishes between keywords (\_, is, as, use, return, def, function, let, and, or, in, not, this, meta, super, for, if, while, match, else) and expression keywords (move)
-  - Recognizes operators, function calls, variables, constants, and record syntax
+### TextMate Grammar (`syntaxes/tql.tmLanguage.json`)
 
-- **Language Configuration** (`language-configuration.json`): Defines editor behaviors
-  - Comment styles (// for line, /\*\*/ for block)
-  - Bracket matching and auto-closing pairs
-  - No custom indentation rules
+Defines syntax highlighting rules for TQL:
 
-- **Package Manifest** (`package.json`): VS Code extension configuration
-  - Registers `.tql` file extension
-  - Links to grammar and language configuration files
-  - No activation events or runtime code
+- Uses a repository pattern with `#root`, `#keywords`, `#expression_keywords`, and `#common` patterns
+- Handles multiple modes: operator mode, expression mode, and nested pipelines in braces
+- Supports TQL-specific literals: timestamps, IPv4/IPv6 addresses, raw strings (r" and r#")
+- Distinguishes between keywords (\_, is, as, use, return, def, function, let, and, or, in, not, this, meta, super, for, if, while, match, else) and expression keywords (move)
+- Recognizes operators, function calls, variables, constants, and record syntax
 
-- **Export Module** (`index.js`): Simple ES module that exports the grammar JSON for use in other packages/tools
+### Language Configuration (`language-configuration.json`)
+
+Defines editor behaviors:
+
+- Comment styles (// for line, /\*\*/ for block)
+- Bracket matching and auto-closing pairs
+- No custom indentation rules
+
+### Package Manifest (`package.json`)
+
+VS Code extension configuration:
+
+- Registers `.tql` file extension
+- Links to grammar and language configuration files
+- No activation events or runtime code
+
+### Export Module (`index.js`)
+
+Simple ES module that exports the grammar JSON for use in other packages/tools.
 
 ## Development Commands
 
