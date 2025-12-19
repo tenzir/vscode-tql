@@ -73,7 +73,7 @@
       "patterns": [
         {
           "name": "keyword",
-          "match": "(?<=\\b)(_|is|as|use|return|def|function|let|and|or|in|not|let|this|meta|super|for|if|while|match|else)(?=\\b)"
+          "match": "(?<=\\b)(_|is|as|use|return|def|function|let|and|or|in|not|this|meta|super|for|if|while|match|else)(?=\\b)"
         }
       ]
     },
