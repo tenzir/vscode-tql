@@ -58,8 +58,6 @@ prettier --write .
 
 ## Important Constraints
 
-- The grammar file (`syntaxes/tql.tmLanguage.json`) is synced to the `tenzir/docs` repository on every push to main via GitHub Actions (`.github/workflows/documentation.yaml`)
-- Changes to the grammar will automatically propagate to documentation
 - The extension has no build step, tests, or runtime dependencies beyond VS Code itself
 - Version updates require manual version bumps in `package.json`
 
