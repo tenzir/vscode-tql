@@ -42,30 +42,13 @@ Simple ES module that exports the grammar JSON for use in other packages/tools.
 
 ## Development Commands
 
-**Test the extension locally:**
-Press F5 in VS Code or use the "Extension" launch configuration in `.vscode/launch.json` to open a new Extension Development Host window
-
-**Package the extension:**
-
-```sh
-vsce package
-```
-
-**Publish to marketplace:**
-
-```sh
-vsce publish patch|minor|major
-```
-
-This bumps the version in `package.json` and publishes. Requires `vsce login tenzir` with a valid Azure DevOps PAT (Marketplace Manage scope).
-
-**Format code:**
-
-```sh
-prettier --write .
-```
-
-(Used for formatting JSON files)
+| Command                            | Description                                                   |
+| ---------------------------------- | ------------------------------------------------------------- |
+| F5 in VS Code                      | Launch Extension Development Host for testing                 |
+| `vsce package`                     | Create a `.vsix` package                                      |
+| `vsce login tenzir`                | Authenticate with Azure DevOps PAT (Marketplace Manage scope) |
+| `vsce publish patch\|minor\|major` | Bump version and publish to marketplace                       |
+| `prettier --write .`               | Format JSON files                                             |
 
 ## Grammar Development Notes
 
