@@ -43,10 +43,10 @@ vsce package
 **Publish to marketplace:**
 
 ```sh
-vsce publish
+vsce publish patch|minor|major
 ```
 
-Note: Requires `vsce login tenzir` with a valid Azure DevOps PAT (Marketplace Manage scope)
+This bumps the version in `package.json` and publishes. Requires `vsce login tenzir` with a valid Azure DevOps PAT (Marketplace Manage scope).
 
 **Format code:**
 
@@ -59,7 +59,6 @@ prettier --write .
 ## Important Constraints
 
 - The extension has no build step, tests, or runtime dependencies beyond VS Code itself
-- Version bumps can be done via `vsce publish patch|minor|major`
 
 ## Grammar Development Notes
 
