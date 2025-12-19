@@ -56,10 +56,6 @@ prettier --write .
 
 (Used for formatting JSON files)
 
-## Important Constraints
-
-- The extension has no build step, tests, or runtime dependencies beyond VS Code itself
-
 ## Grammar Development Notes
 
 When modifying `syntaxes/tql.tmLanguage.json`:
