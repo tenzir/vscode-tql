@@ -59,7 +59,7 @@ prettier --write .
 ## Important Constraints
 
 - The extension has no build step, tests, or runtime dependencies beyond VS Code itself
-- Version updates require manual version bumps in `package.json`
+- Version bumps can be done via `vsce publish patch|minor|major`
 
 ## Grammar Development Notes
 
