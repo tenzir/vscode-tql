@@ -1,0 +1,5 @@
+created: 2025-02-25
+title: VS Code TQL v1.0.1
+intro: >-
+  This release makes the TQL TextMate grammar available to consumers that import
+  the package directly.

@@ -1,0 +1,5 @@
+created: 2025-04-29
+title: VS Code TQL v1.0.3
+intro: >-
+  This release improves TQL grammar coverage for raw strings, nested pipelines,
+  and the `move` keyword.

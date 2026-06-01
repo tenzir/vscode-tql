@@ -1,0 +1,5 @@
+created: 2025-01-22
+title: VS Code TQL v1.0.0
+intro: >-
+  This release promotes the extension to an official marketplace package and
+  improves highlighting for timestamp literals.
