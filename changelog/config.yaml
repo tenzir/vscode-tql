@@ -2,3 +2,6 @@ id: vscode-tql
 name: VS Code TQL
 description: VS Code extension for TQL syntax highlighting
 repository: tenzir/vscode-tql
+release:
+  version_files:
+    - ../package.json

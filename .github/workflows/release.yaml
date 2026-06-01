@@ -1,0 +1,75 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      intro:
+        description: "1-2 sentence release introduction"
+        required: true
+        type: string
+      title:
+        description: "User-facing release title"
+        required: false
+        default: ""
+        type: string
+      bump:
+        description: "Version bump type"
+        required: false
+        default: auto
+        type: choice
+        options:
+          - auto
+          - patch
+          - minor
+          - major
+      version:
+        description: "Explicit stable release version, for example v1.2.3"
+        required: false
+        default: ""
+        type: string
+      rc:
+        description: "Create or continue a release-candidate series"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: tenzir/ship/.github/workflows/release.yaml@main
+    with:
+      intro: ${{ inputs.intro }}
+      title: ${{ inputs.title }}
+      bump: ${{ inputs.bump }}
+      version: ${{ inputs.version }}
+      rc: ${{ inputs.rc }}
+      github_app_id: ${{ vars.TENZIR_GITHUB_APP_ID }}
+      git_user_name: tenzir-bot
+      git_user_email: engineering@tenzir.com
+    secrets:
+      github_app_private_key: ${{ secrets.TENZIR_GITHUB_APP_PRIVATE_KEY }}
+
+  publish-vscode:
+    name: Publish VS Code extension
+    needs: release
+    if: ${{ needs.release.outputs.is_latest == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release.outputs.version }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Publish to Visual Studio Marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npx @vscode/vsce publish
