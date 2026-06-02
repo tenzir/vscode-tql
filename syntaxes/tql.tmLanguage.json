@@ -77,7 +77,7 @@
       "begin": "(?<=\\b)(match)(?=\\b)",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.tql"
+          "name": "keyword"
         }
       },
       "patterns": [
