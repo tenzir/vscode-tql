@@ -1,0 +1,8 @@
+created: 2026-06-02
+title: Match statement highlighting
+intro: >-
+  This release improves TQL syntax highlighting for match statements and makes release
+  publishing run consistently through CI.
+source:
+  mode: sync-stable-queue
+  previous_stable: v1.0.3
