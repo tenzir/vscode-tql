@@ -1,0 +1,23 @@
+min_version: 2.1.6
+glob_matcher: doublestar
+skip_lfs: true
+no_auto_install: true
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: prettier
+      glob: "**/*.{json,js,md,yaml,yml}"
+      exclude: "package-lock.json"
+      run: npm run lint:prettier:files -- {push_files}
+
+    - name: package
+      run: npm run package
+
+fix:
+  parallel: false
+  jobs:
+    - name: prettier
+      glob: "**/*.{json,js,md,yaml,yml}"
+      exclude: "package-lock.json"
+      run: npm run lint:prettier:fix:files -- {files}
