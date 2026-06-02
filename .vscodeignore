@@ -1,17 +1,14 @@
-# Ignore everything by default.
-*
+# Ignore everything by default, including nested files.
+**
 
 # Allow only necessary files for this package.
+!syntaxes/
 !syntaxes/*.json
 !language-configuration.json
+!index.js
 
 # Also allow core metadata files required for packaging.
 !package.json
 !README.md
-!CHANGELOG.md
 !LICENSE
 !logo.png
-
-# Exclude common unwanted directories and files.
-.vscode/
-.github/

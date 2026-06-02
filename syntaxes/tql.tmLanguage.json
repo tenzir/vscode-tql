@@ -14,8 +14,11 @@
     "root": {
       "patterns": [
         {
+          "include": "#match_statement"
+        },
+        {
           "comment": "TODO: Refactor keyword statements.",
-          "begin": "(if|match)",
+          "begin": "(if)",
           "beginCaptures": {
             "0": {
               "name": "keyword"
@@ -63,6 +66,58 @@
             }
           ],
           "end": "(?<!,\\s*)\n$"
+        },
+        {
+          "include": "#common"
+        }
+      ]
+    },
+    "match_statement": {
+      "name": "meta.match.tql",
+      "begin": "(?<=\\b)(match)(?=\\b)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#match_block"
+        },
+        {
+          "include": "#match_common"
+        }
+      ],
+      "end": "(?<=})|(?<!,\\s*)(?<!\\\\\\s*)(?=$)"
+    },
+    "match_block": {
+      "name": "meta.match.body.tql",
+      "begin": "{",
+      "end": "}",
+      "patterns": [
+        {
+          "include": "#match_arm_body"
+        },
+        {
+          "include": "#match_common"
+        }
+      ]
+    },
+    "match_arm_body": {
+      "name": "meta.match.arm.body.tql",
+      "begin": "(?<==>)\\s*{",
+      "patterns": [
+        {
+          "include": "#root"
+        }
+      ],
+      "end": "}"
+    },
+    "match_common": {
+      "patterns": [
+        {
+          "name": "keyword.operator.tql",
+          "match": "=>|\\.\\.|\\|"
         },
         {
           "include": "#common"
