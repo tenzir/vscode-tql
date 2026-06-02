@@ -1,41 +1,37 @@
-# TQL - VS Code Extension
+# TQL for VS Code ⚡
 
-[![VS Code Marketplace](https://img.shields.io/badge/VSCode-Install-blue?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=tenzir.vscode-tql)
+[![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Install-blue?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=tenzir.vscode-tql)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A Visual Studio Code extension for working with the [Tenzir Query Language (TQL)](https://docs.tenzir.com).
+Write [Tenzir Query Language](https://docs.tenzir.com/explanations/language)
+pipelines with syntax highlighting and editor basics in Visual Studio Code.
 
-This extension provides syntax highlighting and language support for TQL.
+## ✨ Highlights
 
-## Installation
+- 🎨 Syntax highlighting for TQL operators, expressions, literals, comments, and
+  match statements.
+- 📄 Automatic language detection for `.tql` files.
+- 💬 Line and block comment support with `//` and `/* ... */`.
+- 🧩 Bracket, quote, and surrounding-pair behavior for everyday editing.
+- 📦 A bundled TextMate grammar that consumers can import directly from the
+  package.
 
-### **From the VS Code Marketplace (Recommended)**
+## 🚀 Installation
 
-1. Open **Visual Studio Code**
-2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`)
-3. Search for **"TQL"**
-4. Click **Install**
+Install the extension from the
+[Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=tenzir.vscode-tql),
+or search for **TQL** in **Extensions** inside VS Code.
 
-### **Manual Installation (VSIX Package)**
-
-If you have a `.vsix` file:
+To build and install a local `.vsix` package:
 
 ```sh
+npm install
+npx @vscode/vsce package
 code --install-extension vscode-tql-<version>.vsix
 ```
 
-## Usage
+VS Code activates the `tql` language mode automatically for `.tql` files.
 
-1. Open a `.tql` file in VS Code.
-2. The syntax highlighting will be applied automatically.
-3. More language features coming soon!
+## 📄 License
 
-## Extension Settings
-
-This extension does not add new settings (yet).
-
-Future updates may introduce customization options.
-
-## License
-
-This extension is licensed under the **MIT License**.
-See [LICENSE](./LICENSE.txt) for details.
+`vscode-tql` is licensed under the [MIT License](LICENSE).
