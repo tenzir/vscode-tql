@@ -14,6 +14,10 @@ pre-push:
     - name: package
       run: npm run package
 
+    - name: changelog
+      glob: "changelog/**"
+      run: uvx tenzir-ship --root changelog validate --lenient
+
 fix:
   parallel: false
   jobs:
