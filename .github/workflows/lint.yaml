@@ -25,5 +25,11 @@ jobs:
       - name: Validate Lefthook config
         run: npm run lefthook:validate
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
       - name: Run Lefthook
         run: npm run lint
+
+      - name: Validate changelog
+        run: uvx tenzir-ship --root changelog validate
