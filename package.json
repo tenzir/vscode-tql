@@ -57,7 +57,7 @@
     "size": 91847
   },
   "devDependencies": {
-    "@vscode/vsce": "^3.9.1",
+    "@vscode/vsce": "^3.9.2",
     "lefthook": "^2.1.9",
     "prettier": "^3.8.3"
   }
