@@ -1,0 +1,9 @@
+created: 2026-07-28
+title: Security updates for development dependencies
+intro: >-
+  This release updates the extension development toolchain to patched dependency releases,
+  resolving denial-of-service, host-confusion, header-injection, and request-routing
+  vulnerabilities.
+source:
+  mode: sync-stable-queue
+  previous_stable: v1.1.0
