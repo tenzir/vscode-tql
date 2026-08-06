@@ -1,0 +1,9 @@
+created: 2026-08-06
+title: Dependency updates for the development toolchain
+intro: >-
+  This release refreshes the extension's development toolchain with current dependency
+  releases, including a patched `fast-uri` that resolves its known host-confusion
+  advisory.
+source:
+  mode: sync-stable-queue
+  previous_stable: v1.1.1
