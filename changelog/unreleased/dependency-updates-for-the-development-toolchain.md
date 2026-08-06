@@ -9,29 +9,18 @@ prs:
 created: 2026-08-06T07:36:37.321533Z
 ---
 
-The extension's development toolchain now runs on current dependency releases, closing a high-severity host-confusion vulnerability in `fast-uri` that affected URL parsing during packaging and validation.
-
-Direct dependencies:
-
-- `lefthook`: 2.1.9 → 2.1.10
-- `prettier`: 3.8.3 → 3.9.6
-
-Notable transitive dependencies:
+Routine dependency update for the development toolchain, including a patched
+`fast-uri` that resolves its known host-confusion advisory:
 
 - `brace-expansion`: 5.0.8 → 5.0.9
 - `fast-uri`: 3.1.4 → 3.1.5
 - `js-yaml`: 4.3.0 → 4.3.1
+- `lefthook`: 2.1.9 → 2.1.10
 - `markdown-it`: 14.2.0 → 14.3.0
+- `prettier`: 3.8.3 → 3.9.6
 - `qs`: 6.15.2 → 6.15.3
 - `semver`: 7.8.1 → 7.8.5
 - `tar-fs`: 2.1.4 → 2.1.5
 
-`npm audit` now reports no known vulnerabilities.
-
-Importing the grammar module also works again on Node 22 and later. The module
-used the removed `assert { type: "json" }` import syntax; it now uses the
-standard `with { type: "json" }` form:
-
-```js
-import tqlGrammar from "vscode-tql";
-```
+Importing the grammar module also works again on Node 22 and later, which no
+longer accepts the module's previous `assert { type: "json" }` import syntax.
