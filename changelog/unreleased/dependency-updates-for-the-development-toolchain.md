@@ -27,3 +27,11 @@ Notable transitive dependencies:
 - `tar-fs`: 2.1.4 → 2.1.5
 
 `npm audit` now reports no known vulnerabilities.
+
+Importing the grammar module also works again on Node 22 and later. The module
+used the removed `assert { type: "json" }` import syntax; it now uses the
+standard `with { type: "json" }` form:
+
+```js
+import tqlGrammar from "vscode-tql";
+```
